@@ -1750,6 +1750,34 @@ export default function EffectCalcurate() {
       const newIsDefButtonClick = [...isDefButtonClick];
       newIsDefButtonClick[index] = !newIsDefButtonClick[index];
       setIsDefButtonClick(newIsDefButtonClick);
+
+      const newNumberOfClicks = () =>
+        newIsDefButtonClick.reduce((acc, value) => acc + value, 0);
+
+      // Inputを空にする
+      setInputValue("");
+
+      //1つだけ押された時はType1,2のどちらかにふくまれるリストを生成
+      //2つ押された時はType1,2のどちらかにふくまれるかを確認。
+      let matchList = [];
+      console.debug(`num ${newNumberOfClicks()}`)
+      if(newNumberOfClicks() == 1){
+        matchList = pokemonTable.filter((element, index2) => {
+          return (element.Type1.includes(getTypeOfIndex(newIsDefButtonClick.indexOf(true))) && element.Type2 == "");
+        });
+      }else if(newNumberOfClicks() == 2){
+        let selected = [];
+        newIsDefButtonClick.map((element,index) => {
+          element === true && selected.push(getTypeOfIndex(index));
+        });
+        console.debug(selected);
+        matchList = pokemonTable.filter((element, index2) => {
+          return ((element.Type1 == selected[0] && element.Type2 == selected[1])
+                ||(element.Type1 == selected[1] && element.Type2 == selected[0]));
+        });
+      }
+      // matchList.length == 0?  setMatchPokemons([]): setMatchPokemons(matchList);
+      setMatchPokemons(matchList);
     }
   };
 
