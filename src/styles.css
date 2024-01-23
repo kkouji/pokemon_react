@@ -75,6 +75,18 @@ p {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
+table   {
+  border-collapse: collapse;
+  width: 100%;
+}
+table tr    {
+  border:1px solid #dedede;
+  padding: 10px;
+}
+table td    {
+  padding-left: 10px;
+}
+
 .selected {
   border: solid 2px #000000;
 }

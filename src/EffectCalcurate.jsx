@@ -1764,7 +1764,11 @@ export default function EffectCalcurate() {
       let matchList = [];
       if (newNumberOfClicks() == 1) {
         matchList = pokemonTable.filter((element, index2) => {
-          return (element.Type1.includes(getTypeOfIndex(newIsDefButtonClick.indexOf(true))) && element.Type2 == "");
+          return (
+            element.Type1.includes(
+              getTypeOfIndex(newIsDefButtonClick.indexOf(true))
+            ) && element.Type2 == ""
+          );
         });
       } else if (newNumberOfClicks() == 2) {
         let selectDefButton = [];
@@ -1772,8 +1776,12 @@ export default function EffectCalcurate() {
           element === true && selectDefButton.push(getTypeOfIndex(index));
         });
         matchList = pokemonTable.filter((element, index2) => {
-          return ((element.Type1 == selectDefButton[0] && element.Type2 == selectDefButton[1])
-            || (element.Type1 == selectDefButton[1] && element.Type2 == selectDefButton[0]));
+          return (
+            (element.Type1 == selectDefButton[0] &&
+              element.Type2 == selectDefButton[1]) ||
+            (element.Type1 == selectDefButton[1] &&
+              element.Type2 == selectDefButton[0])
+          );
         });
       }
       // matchList.length == 0?  setMatchPokemons([]): setMatchPokemons(matchList);
@@ -1882,18 +1890,39 @@ export default function EffectCalcurate() {
 
   //ポケモン検索に一致したポケモンを表示
   const dispMatchPokemon = () => {
-    return matchPokemons.map((element) => {
-      const { No, Name, Type1, Type2 } = element;
       return (
-        <div
-          key={Name}
-          className={`matchPokemon ${selectPokemon === Name ? "selected" : ""}`}
-          onClick={() => selectDefButton(element)}
-        >
-          {`#${No} ${Name}/${Type1}/${Type2}`}
-        </div>
+        <table>
+          <tbody>
+            {matchPokemons.map((element) => {
+              const { No, Name, Type1, Type2 } = element;
+              return (
+                <tr
+                  key={Name}
+                  className={`${selectPokemon === Name ? "selected" : ""}`}
+                  onClick={() => selectDefButton(element)}
+                >
+                  <td>#{No}</td>
+                  <td>{Name}</td>
+                  <td>{Type1}</td>
+                  <td>{Type2}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       );
-    });
+    // return matchPokemons.map((element) => {
+    //   const { No, Name, Type1, Type2 } = element;
+    //   return (
+    //     <div
+    //       key={Name}
+    //       className={`matchPokemon ${selectPokemon === Name ? "selected" : ""}`}
+    //       onClick={() => selectDefButton(element)}
+    //     >
+    //       {`#${No} ${Name}/${Type1}/${Type2}`}
+    //     </div>
+    //   );
+    // });
   };
 
   updateResult();
