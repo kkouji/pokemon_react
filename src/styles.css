@@ -2,6 +2,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
 }
+
 h1 {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -13,6 +14,7 @@ p {
 }
 
 .resetButton {
+  height: 30px;
   z-index: 999;
   padding: 0rem 2rem;
   font-weight: bold;
@@ -87,6 +89,10 @@ p {
   margin-bottom: 1px;
   display: flex;
   flex-direction: column;
+}
+
+.defenceTypeButtons .typeButton {
+  font-size: 15px;
 }
 
 .result .typeButton {

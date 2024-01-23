@@ -1756,24 +1756,24 @@ export default function EffectCalcurate() {
 
       // Inputを空にする
       setInputValue("");
+      // 選択されたポケモンも空にする。
+      setSelectPokemon("");
 
       //1つだけ押された時はType1,2のどちらかにふくまれるリストを生成
       //2つ押された時はType1,2のどちらかにふくまれるかを確認。
       let matchList = [];
-      console.debug(`num ${newNumberOfClicks()}`)
-      if(newNumberOfClicks() == 1){
+      if (newNumberOfClicks() == 1) {
         matchList = pokemonTable.filter((element, index2) => {
           return (element.Type1.includes(getTypeOfIndex(newIsDefButtonClick.indexOf(true))) && element.Type2 == "");
         });
-      }else if(newNumberOfClicks() == 2){
-        let selected = [];
-        newIsDefButtonClick.map((element,index) => {
-          element === true && selected.push(getTypeOfIndex(index));
+      } else if (newNumberOfClicks() == 2) {
+        let selectDefButton = [];
+        newIsDefButtonClick.map((element, index) => {
+          element === true && selectDefButton.push(getTypeOfIndex(index));
         });
-        console.debug(selected);
         matchList = pokemonTable.filter((element, index2) => {
-          return ((element.Type1 == selected[0] && element.Type2 == selected[1])
-                ||(element.Type1 == selected[1] && element.Type2 == selected[0]));
+          return ((element.Type1 == selectDefButton[0] && element.Type2 == selectDefButton[1])
+            || (element.Type1 == selectDefButton[1] && element.Type2 == selectDefButton[0]));
         });
       }
       // matchList.length == 0?  setMatchPokemons([]): setMatchPokemons(matchList);
@@ -1825,6 +1825,7 @@ export default function EffectCalcurate() {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     ];
     setIsDefButtonClick(newIsDefButtonClick);
+    setSelectPokemon("");
     withInput && setInputValue("");
     withInput && setMatchPokemons([]);
   };
